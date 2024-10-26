@@ -21,7 +21,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grass1_LOD0 1
-  m_Shader: {fileID: -6465566751694194690, guid: 71e774555e71c2348ab62b39ed5143a1, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 2c8ff5ff18d1bb24ead958ffdf99e791,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
