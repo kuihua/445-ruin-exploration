@@ -8,6 +8,7 @@ TagManager:
   - Flag
   - Skull
   - Button
+  - Flower
   layers:
   - Default
   - TransparentFX
