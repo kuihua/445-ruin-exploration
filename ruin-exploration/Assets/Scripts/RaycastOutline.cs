@@ -36,7 +36,7 @@ public class RaycastOutline : MonoBehaviour
 
             // if (hitRenderer != null && string.Compare(raycastHit.collider.name, "skull") == 0 ) {
             if (hitRenderer != null && raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("interactables") ) {
-                // Debug.Log(raycastHit.collider.name);
+                Debug.Log(raycastHit.collider.name);
 
                 if (hitRenderer != lastHitRenderer) {
                     if (lastHitRenderer != null) {
