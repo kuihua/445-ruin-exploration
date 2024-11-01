@@ -10,11 +10,11 @@ public class RaycastOutline : MonoBehaviour
     private float maxRayDistance;
     private Renderer lastHitRenderer = null; // Keep track of the last hit object's renderer
 
-    private float hideOutlineScale = 0.1f;
-    private float showOutlineScale = 1.15f;
+    private float hideOutlineScale = 0f;
+    private float showOutlineScale = 0.015f;
 
-    [SerializeField] private Color showColour = new Color (166,197, 238);
-    [SerializeField] private Color hideColour = Color.clear;
+    // [SerializeField] private Color showColour = new Color (232,234, 63);
+    // [SerializeField] private Color hideColour = Color.clear;
 
 
     // Start is called before the first frame update
@@ -41,35 +41,35 @@ public class RaycastOutline : MonoBehaviour
                 if (hitRenderer != lastHitRenderer) {
                     if (lastHitRenderer != null) {
                         // hide outline of previous object
-                        // lastHitRenderer.materials[1].SetFloat("_Scale", hideOutlineScale);
-                        lastHitRenderer.materials[1].SetColor("_Color", hideColour);
+                        lastHitRenderer.materials[1].SetFloat("_Outline_Thickness", hideOutlineScale);
+                        // lastHitRenderer.materials[1].SetColor("_Color", hideColour);
                     }
                     Debug.Log("saved");
                     lastHitRenderer = hitRenderer;
                 }
                 // show outline
                 // Debug.Log(hitRenderer.materials[1].name);
-                // hitRenderer.materials[1].SetFloat("_Scale", showOutlineScale);  
-                hitRenderer.materials[1].SetColor("_Color", showColour);
+                hitRenderer.materials[1].SetFloat("_Outline_Thickness", showOutlineScale);  
+                // hitRenderer.materials[1].SetColor("_Color", showColour);
             }
             else {
            // If nothing is hit and we previously looked at an object, reset its color
             if (lastHitRenderer != null) {
                 // Debug.Log("not looking " + lastHitRenderer.name);
                 // hide outline of previous object
-                // lastHitRenderer.materials[1].SetFloat("_Scale", hideOutlineScale);
-                lastHitRenderer.materials[1].SetColor("_Color", showColour);
+                lastHitRenderer.materials[1].SetFloat("_Outline_Thickness", hideOutlineScale);
+                // lastHitRenderer.materials[1].SetColor("_Color", showColour);
 
                 // If the object's color is back to the original, clear the reference
-                // if (lastHitRenderer.materials[1].GetFloat("_Scale") == hideOutlineScale)
-                // {
-                //     lastHitRenderer = null;
-                // }
-
-                if (lastHitRenderer.materials[1].color == showColour)
+                if (lastHitRenderer.materials[1].GetFloat("_Outline_Thickness") == hideOutlineScale)
                 {
                     lastHitRenderer = null;
                 }
+
+                // if (lastHitRenderer.materials[1].color == showColour)
+                // {
+                //     lastHitRenderer = null;
+                // }
             }
         }
 
