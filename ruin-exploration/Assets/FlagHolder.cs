@@ -18,19 +18,21 @@ public class FlagHolder : MonoBehaviour
             Debug.Log("all levers are on");
             revealFlag = true;
             GetComponent<Renderer>().material.color = Color.red;
-        }
+        } 
+        // else {
+        //     GetComponent<Renderer>().material.color = Color.blue;
+        // }
     }
 
     bool allLeversOn() {
-        bool correctLevers = true;
+        // bool correctLevers = true;
 
-        for (int i = 0; i < levers.Length; i++)
-        {
+        for (int i = 0; i < levers.Length; i++) {
             if (!levers[i].GetComponent<leverScript>().IsOn()) {
-                correctLevers = false;
-                break;
-            }
+                // correctLevers = false;
+                return false;
+            } 
         }
-        return correctLevers;
+        return true;
     }
 }
