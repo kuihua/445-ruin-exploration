@@ -7,6 +7,7 @@ public class leverScript : MonoBehaviour
 {
     // array of levers that will be changed if its flicked
     [SerializeField] GameObject[] affectedLevers;
+    [SerializeField] private AudioClip leverSoundClip;
     private bool isOn;
 
     // Start is called before the first frame update
@@ -36,6 +37,7 @@ public class leverScript : MonoBehaviour
             {
                 affectedLevers[i].GetComponent<Animator>().SetTrigger("LeverOn");
                 affectedLevers[i].GetComponent<leverScript>().setIsOn();
+                SoundFXManager.instance.PlaySoundFXClip(leverSoundClip, transform, 1f);
                 // Debug.Log(isOn + " " + transform.localRotation.eulerAngles.x);
                 // if (transform.localRotation.eulerAngles.x == 40) {
                 //     isOn = true;

@@ -8,6 +8,8 @@ public class TreasurePedestal : MonoBehaviour
     ObjectPedestal[] objectPedestals;
     [SerializeField]
     Transform target;
+
+    [SerializeField] private AudioClip revealTreasureSoundClip;
     
     bool revealTreasure;
     float moveSpeed = 3;
@@ -25,6 +27,7 @@ public class TreasurePedestal : MonoBehaviour
         if(!revealTreasure && allPedestalsActivated()) {
             Debug.Log("all objects correct");
             revealTreasure = true;
+            SoundFXManager.instance.PlaySoundFXClip(revealTreasureSoundClip, transform, 1f);
         }
         else if(revealTreasure) {
             transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
