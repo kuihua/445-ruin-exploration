@@ -33,6 +33,8 @@ public class RaycastOutline : MonoBehaviour
         // Check if the ray hits an object within max distance
         if (Physics.Raycast(ray, out raycastHit, maxRayDistance)) {
             Renderer hitRenderer = raycastHit.transform.GetComponent<Renderer>();
+            //testing
+            // Renderer childRenderer
 
             // if (hitRenderer != null && string.Compare(raycastHit.collider.name, "skull") == 0 ) {
             if (hitRenderer != null && raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("interactables") ) {
@@ -44,7 +46,7 @@ public class RaycastOutline : MonoBehaviour
                         lastHitRenderer.materials[1].SetFloat("_Outline_Thickness", hideOutlineScale);
                         // lastHitRenderer.materials[1].SetColor("_Color", hideColour);
                     }
-                    Debug.Log("saved");
+                    // Debug.Log("saved");
                     lastHitRenderer = hitRenderer;
                 }
                 // show outline
