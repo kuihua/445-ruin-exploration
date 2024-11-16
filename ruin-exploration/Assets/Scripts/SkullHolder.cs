@@ -9,7 +9,7 @@ public class SkullHolder : MonoBehaviour
     [SerializeField]
     Grave[] wrongGraves;
 
-    bool revealSkull;
+    // bool revealSkull;
 
     const int ASLEEP = 0;
     const int AWAKE = 1;
@@ -22,7 +22,7 @@ public class SkullHolder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        revealSkull = false;
+        // revealSkull = false;
         state = ASLEEP;
 
         ogColour = GetComponent<Renderer>().material.color;
