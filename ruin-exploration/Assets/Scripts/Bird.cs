@@ -63,7 +63,7 @@ public class Bird : MonoBehaviour
                 anchorPos = transform.position;
                 if(distance < 15) {
                     state = WALK;
-                    Debug.Log("walk");
+                    // Debug.Log("walk");
                 }
                 break;
             case WALK:
@@ -72,19 +72,19 @@ public class Bird : MonoBehaviour
 
                 changeDirTimer -= Time.deltaTime;
                 if(changeDirTimer <= 0) {
-                    ChangeDirection(1);
+                    ChangeDirection(20);
                 }
 
                 if(distance > 15) {
                     state = STILL;
-                    Debug.Log("still");
+                    // Debug.Log("still");
                 }
                 else if(distance < 5) {
                     state = SCARED;
                     yTarget = Random.Range(15, 20);
                     flyModel.SetActive(true);
                     walkModel.SetActive(false);
-                    Debug.Log("scared");
+                    // Debug.Log("scared");
                 }
                 break;
             case SCARED:
@@ -94,12 +94,12 @@ public class Bird : MonoBehaviour
 
                 changeDirTimer -= Time.deltaTime;
                 if(changeDirTimer <= 0) {
-                    ChangeDirection(1);
+                    ChangeDirection(20);
                 }
 
                 if(transform.position.y >= yTarget) {
                     state = FLY;
-                    Debug.Log("fly");
+                    // Debug.Log("fly");
                 }
                 break;
             case FLY:
@@ -107,40 +107,46 @@ public class Bird : MonoBehaviour
 
                 changeDirTimer -= Time.deltaTime;
                 if(changeDirTimer <= 0) {
-                    ChangeDirection(1);
+                    ChangeDirection(40);
                 }
 
                 if(distance > 10) {
                     state = LANDING;
-                    Debug.Log("landing");
+                    // Debug.Log("landing");
                 }
                 break;
             case LANDING:
+                transform.LookAt(new Vector3(anchorPos.x, transform.position.y, anchorPos.z));
+
                 flyDirection = anchorPos - transform.position;
-                if(flyDirection.magnitude < takeOffSpeed) {
-                    rb.velocity = flyDirection;
+                if(flyDirection.magnitude < takeOffSpeed * Time.deltaTime) {
+                    rb.velocity = new Vector3(0, 0, 0);
+                    transform.position = anchorPos;
+                    // Debug.Log("landed");
                 }
                 else {
                     rb.velocity = flyDirection.normalized * takeOffSpeed;
                 }
+                // transform.LookAt(anchorPos);
+                // Debug.Log(transform.rotation);
                 
                 if(transform.position.y == anchorPos.y) {
                     state = WALK;
                     walkModel.SetActive(true);
                     flyModel.SetActive(false);
-                    Debug.Log("walk");
+                    // Debug.Log("walk");
                 }
                 break;
         }
     }
 
-    void ChangeDirection(int nextTimer) {
+    void ChangeDirection(int halfRange) {
         // Debug.Log("called");
         if(Random.Range(0, 1.0f) < 0.5f) {
-            float angleInc = Random.Range(-20, 20);
+            float angleInc = Random.Range(-halfRange, halfRange);
             transform.Rotate(0, angleInc, 0);
-            // Debug.Log("changed");
+            // Debug.Log(angleInc);
         }
-        changeDirTimer = nextTimer;
+        changeDirTimer = 1;
     }
 }
