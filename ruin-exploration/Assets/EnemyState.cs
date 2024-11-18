@@ -15,6 +15,7 @@ public class EnemyState : MonoBehaviour
     const int ATTACK = 2;
     int state;
     Color ogcolour;
+    float changeDirTimer;
 
 
 
@@ -24,6 +25,7 @@ public class EnemyState : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         state = IDLE;
         ogcolour = GetComponent<Renderer>().material.color;
+        changeDirTimer = 3;
     }
 
     // Update is called once per frame
@@ -42,7 +44,12 @@ public class EnemyState : MonoBehaviour
 
         switch(state) {
             case IDLE:
-                rb.velocity = new Vector3(0, 0, 0);
+                // rb.velocity = new Vector3(0, 0, 0);
+                rb.velocity = transform.forward * 2;
+                changeDirTimer -= Time.deltaTime;
+                if(changeDirTimer <= 0) {
+                    ChangeDirection(100);
+                }
                 GetComponent<Renderer>().material.color = ogcolour;
                 break;
             case FOLLOW:
@@ -80,5 +87,14 @@ public class EnemyState : MonoBehaviour
     public void FollowPlayer() {
         Vector3 direction = player.position - transform.position;
         rb.velocity = direction.normalized * moveSpeed * Time.deltaTime;
+    }
+
+    void ChangeDirection(int halfRange) {
+        if(Random.Range(0, 1.0f) < 0.5f) {
+            float angleInc = Random.Range(-halfRange, halfRange);
+            transform.Rotate(0, angleInc, 0);
+            Debug.Log("change direction");
+        }
+        changeDirTimer = 1;
     }
 }
