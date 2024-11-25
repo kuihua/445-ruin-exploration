@@ -26,6 +26,9 @@ public class Bird : MonoBehaviour
     float changeDirTimer;
     float yTarget;
 
+    [SerializeField] private AudioClip birdChirpClip;
+    [SerializeField] private AudioClip birdFlapClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +72,7 @@ public class Bird : MonoBehaviour
             case WALK:
                 rb.velocity = transform.forward * walkSpeed;
                 anchorPos = transform.position;
+                SoundFXManager.instance.PlaySoundFXClip(birdChirpClip, transform, 1f);
 
                 changeDirTimer -= Time.deltaTime;
                 if(changeDirTimer <= 0) {
@@ -89,6 +93,7 @@ public class Bird : MonoBehaviour
                 break;
             case SCARED:
                 // Vector3 flyDirection = transform.forward + new Vector3(0, 3, 0);
+                SoundFXManager.instance.PlaySoundFXClip(birdFlapClip, transform, 1f);
                 flyDirection = transform.forward + transform.up * 3;
                 rb.velocity = flyDirection.normalized * takeOffSpeed;
 
