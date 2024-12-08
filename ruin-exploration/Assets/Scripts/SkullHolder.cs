@@ -9,6 +9,11 @@ public class SkullHolder : MonoBehaviour
     [SerializeField]
     Grave[] wrongGraves;
 
+    [SerializeField]
+    GameObject lid;
+    [SerializeField]
+    Transform lidTarget;
+
     // bool revealSkull;
 
     const int ASLEEP = 0;
@@ -58,6 +63,8 @@ public class SkullHolder : MonoBehaviour
                 break;
             case OPEN:
                 GetComponent<Renderer>().material.color = Color.black;
+                lid.transform.position = Vector3.MoveTowards(lid.transform.position, lidTarget.position, 2 * Time.deltaTime);
+                lid.transform.rotation = Quaternion.RotateTowards(lid.transform.rotation, lidTarget.rotation, 100 * Time.deltaTime);
                 break;
             case ANGRY:
                 GetComponent<Renderer>().material.color = Color.red;
