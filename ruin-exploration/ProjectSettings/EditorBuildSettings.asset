@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ruin Game.unity
     guid: a91604bb632c79a439c9c4f97e92b22e
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: edaf77253d2ba884c90715d76f2a5dd1
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ed72be55522c8448bae8b0d66fa21adf,
       type: 2}
