@@ -6,6 +6,8 @@ public class FlagHolder : MonoBehaviour
 {
     [SerializeField] GameObject[] levers;
     bool revealFlag;
+
+    [SerializeField] Transform lidTarget;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +19,11 @@ public class FlagHolder : MonoBehaviour
         if(!revealFlag && allLeversOn()) {
             Debug.Log("all levers are on");
             revealFlag = true;
-            GetComponent<Renderer>().material.color = Color.red;
+            // GetComponent<Renderer>().material.color = Color.red;
         } 
+        else if (revealFlag) {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, lidTarget.rotation, 100 * Time.deltaTime);
+        }
         // else {
         //     GetComponent<Renderer>().material.color = Color.blue;
         // }
