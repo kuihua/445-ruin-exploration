@@ -13,6 +13,7 @@ public class SkullHolder : MonoBehaviour
     GameObject lid;
     [SerializeField]
     Transform lidTarget;
+    [SerializeField] AudioClip openSfx;
 
     // bool revealSkull;
 
@@ -65,6 +66,7 @@ public class SkullHolder : MonoBehaviour
                 GetComponent<Renderer>().material.color = Color.black;
                 lid.transform.position = Vector3.MoveTowards(lid.transform.position, lidTarget.position, 2 * Time.deltaTime);
                 lid.transform.rotation = Quaternion.RotateTowards(lid.transform.rotation, lidTarget.rotation, 100 * Time.deltaTime);
+                SoundFXManager.instance.PlaySoundFXClip(openSfx, transform, 1f);
                 break;
             case ANGRY:
                 GetComponent<Renderer>().material.color = Color.red;

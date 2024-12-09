@@ -6,8 +6,10 @@ public class FlagHolder : MonoBehaviour
 {
     [SerializeField] GameObject[] levers;
     bool revealFlag;
+    bool opened;
 
     [SerializeField] Transform lidTarget;
+    [SerializeField] AudioClip openSfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,11 @@ public class FlagHolder : MonoBehaviour
         } 
         else if (revealFlag) {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, lidTarget.rotation, 100 * Time.deltaTime);
+            // so sound only plays once
+            if(!opened){
+                SoundFXManager.instance.PlaySoundFXClip(openSfx, transform, 1f);
+                opened = true;
+            }
         }
         // else {
         //     GetComponent<Renderer>().material.color = Color.blue;
