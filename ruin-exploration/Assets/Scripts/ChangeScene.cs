@@ -25,6 +25,10 @@ public class ChangeScene : MonoBehaviour
         SceneManager.LoadScene("StartScreen");
     }
 
+    public void Win() {
+        SceneManager.LoadScene("WinScreen");
+    }
+
     public void QuitGame() {
         Application.Quit();
     }
