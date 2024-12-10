@@ -10,6 +10,8 @@ public class TreasurePedestal : MonoBehaviour
     Transform target;
 
     [SerializeField] private AudioClip revealTreasureSoundClip;
+
+    [SerializeField] GameObject chalice;
     
     bool revealTreasure;
     float moveSpeed = 3;
@@ -27,6 +29,7 @@ public class TreasurePedestal : MonoBehaviour
         if(!revealTreasure && allPedestalsActivated()) {
             Debug.Log("all objects correct");
             revealTreasure = true;
+            chalice.SetActive(true);
             SoundFXManager.instance.PlaySoundFXClip(revealTreasureSoundClip, transform, 1f);
         }
         else if(revealTreasure) {
